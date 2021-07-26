@@ -4,9 +4,9 @@ public class User {
 
 
 
-    private int id;                  //unique userid
-    private String userName;        //name of investor
-    private double balance;        //amount of money in the account
+    private int id;                  // unique userid
+    private String userName;        // name of investor
+    private double balance;        // amount of money in the account
 
     //REQUIRES: id must be a unique positive integer, userName length >= 1
     //EFFECTS: Sets balance to 0, sets id to user, sets username

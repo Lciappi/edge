@@ -14,13 +14,14 @@ public class EdgePlatform {
     private Scanner input;
     private Borrower borrower;
     private Lender lender;
-    private User user;
     private LinkedList<Borrower> availableBorrowers;
 
+    //EFFECTS: runs the Edge platform
     public EdgePlatform() {
         runApp();
     }
 
+    //EFFECTS: establishes whether user is a borrower or lender
     public void runApp() {
         Boolean run = true;
         init();
@@ -43,6 +44,8 @@ public class EdgePlatform {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: instantiates borrower and runs different menus depending on input
     private void runBorrow(String name) {
         boolean run = true;
         String command = null;
@@ -65,6 +68,7 @@ public class EdgePlatform {
         System.out.println("\nGoodbye!");
     }
 
+    //EFFECTS: processes menu for guests
     private void processCommonMenu(String command, User u) {
         if (command.equals("1")) {
             viewBalance(u);
@@ -78,6 +82,7 @@ public class EdgePlatform {
 
     }
 
+    //processes menu for borrowers
     private void processBorrowCommand(String command) {
         if (command.equals("1")) {
             viewDebt();
@@ -98,6 +103,23 @@ public class EdgePlatform {
         }
     }
 
+    //EFFECTS: processes menu and input for lenders
+    private void processLenderCommand(String command) {
+
+        if (command.equals("1")) {
+            viewLoanedAmount();
+        } else if (command.equals("2")) {
+            viewInterestAccrued();
+        } else if (command.equals("3")) {
+            chooseBorrower();
+        } else if (command.equals("4")) {
+            viewPortfolio();
+
+        } else {
+            System.out.println("Selection not valid...");
+        }
+    }
+
     private void viewDebt() {
         System.out.println("Current debt: " + borrower.getAmountBorrowed());
     }
@@ -110,6 +132,8 @@ public class EdgePlatform {
         System.out.println("Your current balance is " + u.getBalance());
     }
 
+    //MODIFIES: this
+    //EFFECTS: helps client take on debt
     private void doDebt() {
 
         System.out.println("Please enter amount to debt to have: ");
@@ -126,6 +150,8 @@ public class EdgePlatform {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: will allow customers to pay debt
     private void payDebtOrInterest(String command) {
         System.out.println("Please enter amount to pay off: ");
         double amount = input.nextDouble();
@@ -165,6 +191,8 @@ public class EdgePlatform {
         viewBalance(u);
     }
 
+    // MODIFIES: this
+    // EFFECTS: conducts a withdraw transaction
     private void doWithdraw(User u) {
         System.out.println("Please enter amount to withdraw: ");
         double amount = input.nextDouble();
@@ -181,6 +209,7 @@ public class EdgePlatform {
         viewBalance(u);
     }
 
+    //EFFECTS: Display menu
     private void displayCommonMenu() {
         System.out.println("Please select an item from the menu");
         System.out.println("1 - See Balance");
@@ -190,6 +219,7 @@ public class EdgePlatform {
         System.out.println("Q - To quit");
     }
 
+    //EFFECTS: Display menu
     private void displayBorrowMenu() {
         System.out.println("Please select an item from the menu");
         System.out.println("1 - Current Debt");
@@ -201,6 +231,18 @@ public class EdgePlatform {
 
     }
 
+    //EFFECTS: Display menu
+    private void displayLenderMenu() {
+        System.out.println("Please select an item from the menu");
+        System.out.println("1 - Current money being lent");
+        System.out.println("2 - Current interest payments due");
+        System.out.println("3 - Add a borrower to your portfolio");
+        System.out.println("4 - View who owes you money");
+        System.out.println("Q - To quit");
+    }
+
+    //MODIFIES: this
+    //EFFECTS: allows lenders to lend money
     private void runLend(String name) {
         boolean run = true;
         String command = null;
@@ -223,24 +265,8 @@ public class EdgePlatform {
         System.out.println("\nGoodbye!");
     }
 
-    private void processLenderCommand(String command) {
 
-        if (command.equals("1")) {
-            viewLoanedAmount();
-        } else if (command.equals("2")) {
-            viewInterestAccrued();
-        } else if (command.equals("3")) {
-            chooseBorrower();
-        } else if (command.equals("4")) {
-            viewPortfolio();
-
-        } else {
-            System.out.println("Selection not valid...");
-        }
-
-
-    }
-
+    //EFFECTS: Display menu
     private void viewPortfolio() {
         for (Borrower item : lender.getPortfolio()) {
             System.out.println(item.getName() + " owes you " + item.getAmountBorrowed() + " with "
@@ -248,6 +274,17 @@ public class EdgePlatform {
         }
     }
 
+    private void viewInterestAccrued() {
+        System.out.println("You have earned: " + lender.getPotentialInterest());
+
+    }
+
+    private void viewLoanedAmount() {
+        System.out.println("You have lent out: " + lender.getAmountLent());
+    }
+
+    //EFFECTS: allows lender to choose borrower
+    //MODIFIES: this
     private void chooseBorrower() {
         int counter = 0;
         System.out.println("Please choose a borrower, Or, press 'q' to cancel: ");
@@ -266,6 +303,8 @@ public class EdgePlatform {
         }
     }
 
+    //EFFECTS allows loan to be valid
+    //MODIFIES: this
     private void processLoan(Borrower finalist) {
 
         if (finalist.getAmountBorrowed() <= lender.getBalance()) {
@@ -277,26 +316,10 @@ public class EdgePlatform {
         }
     }
 
-    private void viewInterestAccrued() {
-        System.out.println("You have earned: " + lender.getPotentialInterest());
-
-    }
-
-    private void viewLoanedAmount() {
-        System.out.println("You have lent out: " + lender.getAmountLent());
-    }
-
-    private void displayLenderMenu() {
-        System.out.println("Please select an item from the menu");
-        System.out.println("1 - Current money being lent");
-        System.out.println("2 - Current interest payments due");
-        System.out.println("3 - Add a borrower to your portfolio");
-        System.out.println("4 - View who owes you money");
-        System.out.println("Q - To quit");
-    }
 
 
-
+    //MODIFIES: This
+    //EFFECTS: initialize variables
     private void init() {
         input = new Scanner(System.in);
         availableBorrowers = new LinkedList<>();

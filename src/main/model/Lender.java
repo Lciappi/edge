@@ -8,11 +8,10 @@ public class Lender extends User {
 
     private double potentialInterest;         // interest that will eventually be collected when loan ends
     private double amountLent;               // how much money has been lent out
-
-
-
     private LinkedList<Borrower> portfolio; // who the lender has given money to
 
+    //REQUIRES: id must be unique positive integer and name should be at least size 1
+    //EFFECTS: instantiates linkedlist, sets id and name in supertype
     public Lender(int id, String name) {
         super(id, name);
         this.portfolio = new LinkedList<>();
@@ -22,7 +21,6 @@ public class Lender extends User {
     //MODIFIES: this, User
     //EFFECTS: removes amount from balance, adds amount to amountLent, adds interest
     //         returns the user's balance
-
     public double loanMoney(double amount, double interest) {
         super.withdraw(amount);
         this.amountLent += amount;
@@ -47,6 +45,5 @@ public class Lender extends User {
 
     public double getAmountLent() {
         return Math.round(amountLent * 100) / 100D;
-
     }
 }

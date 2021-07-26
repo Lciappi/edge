@@ -12,7 +12,6 @@ public class Borrower extends User {
     //EFFECTS: passes id and name to supertype constructor, sets interest rate for loans
     //         and sets amount borrowed to 0
     //MODIFIES: this, user
-
     public Borrower(int id, String name) {
         super(id, name);
         this.amountBorrowed = 0;

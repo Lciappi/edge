@@ -93,11 +93,10 @@ public class BorrowerTest {
     @Test void testPayInterest(){
         testUser.loan(5000);
         testUser.loan(2000.3);
+        testUser.payInterest(90.006);
 
-        assertEquals(3744.04, testUser.payLoan(3256.26));
-
-        assertEquals(90.006, testUser.getInterestOwed());
-        assertEquals(176.74199677156693, testUser.getRiskScore());
+        assertEquals(0, testUser.getInterestOwed());
+        assertEquals(150, testUser.getRiskScore());
 
     }
 

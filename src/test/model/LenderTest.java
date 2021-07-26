@@ -21,6 +21,23 @@ public class LenderTest {
 
     }
 
+    @Test
+    void addBorrowergetPortolioTest(){
+        Borrower b1 = new Borrower(123, "Pat");
+        Borrower b2 = new Borrower(321, "John");
+        Borrower b3 = new Borrower(231, "Clayton");
+
+        testUser.addBorrower(b1);
+        testUser.addBorrower(b2);
+        testUser.addBorrower(b3);
+
+        assertEquals(3, testUser.getPortfolio().size());
+        assertTrue(testUser.getPortfolio().contains(b1));
+        assertTrue(testUser.getPortfolio().contains(b2));
+        assertTrue(testUser.getPortfolio().contains(b3));
+    }
+
+
 
     @Test
     void testLoanPassMoney(){

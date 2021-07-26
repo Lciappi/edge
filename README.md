@@ -25,7 +25,8 @@ important it is for people to have access to money. Loans make the economy work,
 and they can help materialize great ideas and innovations. Peer to peer lending 
 also allows lenders to have complete control of how their money is being allocated,
 as opposed to traditional bank accounts, were customers do not have a say on how their
-money is allocated.
+money is used. Furthermore, in the future I might be inclined to apply for CS jobs that 
+require finance knowledge, and that is why this project may be helpful in the future.
 
  
  ## User Stories
@@ -40,11 +41,7 @@ money is allocated.
  - As a lender, I want to be able to view the interest I have collected
  - As a lender, I want to be able to see how much money I have lent out
  
- - As a borrower, I want to be able to see how much money I have borrowed
- - As a borrower, I want to be able to see how much interest I need to pay
- - As a borrower, I want to be able to calculate my risk score.
-            -> For this project risk score is calculated by number of loans
- - As a borrower, I want to be able to see my interest rate.
-            -> Interest rate is set by risk score 
+ - As a borrower, I want to be able to see how much money I have borrowed and also be able to pay it
+ - As a borrower, I want to be able to see how much interest I need to pay and also be able to pay it
  
 

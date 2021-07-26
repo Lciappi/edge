@@ -27,7 +27,6 @@ also allows lenders to have complete control of how their money is being allocat
 as opposed to traditional bank accounts, were customers do not have a say on how their
 money is used. Furthermore, in the future I might be inclined to apply for CS jobs that 
 require finance knowledge, and that is why this project may be helpful in the future.
-
  
  ## User Stories
  

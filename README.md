@@ -1,33 +1,46 @@
 # CPSC 210 Project 
 
-## Edge  -*Fuel for great ideas*
+## Edge  -*Small loans for great ideas*
 
 Description of Edge:
 
-Edge is a platform that aims to connect investors
-with entrepreneurs. Entrepreneurs, looking to start or 
-expand their business, will issue loans and investors 
-will offer their capital in return for interest payments.
+Peer to peer loans are revolutionising the financial industry. The idea is to create a 
+platform where people who need money (borrowers) and investors willing to give money
+(lenders) can meet. Borrowers get the money today by promising lenders that they will
+pay back the money, with an additional interest rate. Investors are willing to take on
+the risk (of not getting their money back) in order to have more money in the future.
+This concept is nothing new, and banks have been doing it for centuries, however, by
+removing them from the transactions, investors can get higher returns and borrowers
+get lower interest rates. 
 
-The program will have:
- - an administrator, which adds companies'
-   loans to the program.
- - users, that choose which loans to invest in
+
+The program will have 2 types of users:
+ - borrowers
+ - lenders
  
  Rationale:
 
-As a member of a capitalistic society I believe that it is important
-to provide technologies with the necessary capital to execute their plan. As an investor,
-I believe that a low interest rate environment, and an overvalued stock market
-means that it is hard to find safe investment opportunities. And as a son, I have
-seen the impact the pandemic has had on many small businesses, and fresh capital
-could allow companies to re position themselves and create jobs.
+As someone that has lived in capitalist countries all my life, I know how
+important it is for people to have access to money. Loans make the economy work,
+and they can help materialize great ideas and innovations. Peer to peer lending 
+also allows lenders to have complete control of how their money is being allocated,
+as opposed to traditional bank accounts, were customers do not have a say on how their
+money is allocated.
+
  
  ## User Stories
  
- - As a user, I want to be able to add an investment to my portfolio
- - As a user, I want to be able to view the list of investments on my portfolio
- - As a user, I want to be able to see the balance of the user class
- - As a user, I want to be able to deposit money to the user class
- - As a user, I want to be able to withdraw money from the user class
+  - As a user, I want to be able to deposit money to the user class
+  - As a user, I want to be able to withdraw money from the user class
+  - As a user, I want to be able to set my name
+  - As a user, I want to be able to see the balance in my account
+ 
+ - As a lender, I want to be able to add a borrower to my portfolio
+ - As a lender, I want to be able to view the list of investments on my portfolio
+ - As a lender, I want to be able to view the interest I have collected
+ - As a lender, I want to be able to see how much money I have lent out
+ 
+ - As a borrower, I want to be able to see how much money I have borrowed
+ - As a borrower, I want to be able to see how much interest I need to pay
+ 
 

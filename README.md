@@ -23,3 +23,11 @@ means that it is hard to find safe investment opportunities. And as a son, I hav
 seen the impact the pandemic has had on many small businesses, and fresh capital
 could allow companies to re position themselves and create jobs.
  
+ ## User Stories
+ 
+ - As a user, I want to be able to add an investment to my portfolio
+ - As a user, I want to be able to view the list of investments on my portfolio
+ - As a user, I want to be able to see the balance of the user class
+ - As a user, I want to be able to deposit money to the user class
+ - As a user, I want to be able to withdraw money from the user class
+

@@ -1,5 +1,6 @@
 package model;
 
+// a type of edge user that can borrow money
 public class Borrower extends User {
 
 

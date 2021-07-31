@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
+// edge platform user interface
 public class EdgePlatform {
     private Scanner input;
     private Borrower borrower;
@@ -298,23 +299,12 @@ public class EdgePlatform {
         if (command.equals("q")) {
             System.out.println("Leaving ...");
         } else {
-            processLoan(finalist);
+            lender.processLoan(finalist);
 
         }
     }
 
-    //EFFECTS allows loan to be valid
-    //MODIFIES: this
-    private void processLoan(Borrower finalist) {
 
-        if (finalist.getAmountBorrowed() <= lender.getBalance()) {
-            lender.addBorrower(finalist);
-            lender.loanMoney(finalist.getAmountBorrowed(), finalist.getInterestOwed());
-            System.out.println(finalist.getName() + " has been added to your portfolio");
-        } else {
-            System.out.println("You have insufficient funds to write this loan");
-        }
-    }
 
 
 

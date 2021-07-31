@@ -1,5 +1,6 @@
 package model;
 
+// A class for all the users of the Edge platform
 public class User {
 
 

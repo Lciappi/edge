@@ -1,9 +1,11 @@
 package model;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import sun.awt.image.ImageWatched;
 
 import java.util.LinkedList;
 
+// Creates a type of edge user that can lend out their money
 public class Lender extends User {
 
     private double potentialInterest;         // interest that will eventually be collected when loan ends
@@ -27,6 +29,19 @@ public class Lender extends User {
         this.potentialInterest += interest;
         return super.getBalance();
 
+    }
+    //TODO: Please add tests to this function
+    //EFFECTS allows loan to be valid
+    //MODIFIES: this
+    public void processLoan(Borrower finalist) {
+
+        if (finalist.getAmountBorrowed() <= this.getBalance()) {
+            this.addBorrower(finalist);
+            this.loanMoney(finalist.getAmountBorrowed(), finalist.getInterestOwed());
+            System.out.println(finalist.getName() + " has been added to your portfolio");
+        } else {
+            System.out.println("You have insufficient funds to write this loan");
+        }
     }
 
     //MODIFIES: this

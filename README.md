@@ -30,17 +30,27 @@ require finance knowledge, and that is why this project may be helpful in the fu
  
  ## User Stories
  
-  - As a user, I want to be able to deposit money to the user class
-  - As a user, I want to be able to withdraw money from the user class
-  - As a user, I want to be able to set my name
-  - As a user, I want to be able to see the balance in my account
+ "-" Phase 1 Stories , "*" Phase 2 Stories
+ 
+ - As a user, I want to be able to deposit money to the user class
+ - As a user, I want to be able to withdraw money from the user class
+ - As a user, I want to be able to set my name
+ - As a user, I want to be able to see the balance in my account
+ 
  
  - As a lender, I want to be able to add a borrower to my portfolio
  - As a lender, I want to be able to view the list of borrowers on my portfolio
  - As a lender, I want to be able to view the interest I have collected
  - As a lender, I want to be able to see how much money I have lent out
+ * As a lender, I want to be able to choose between loading previous session or reset memory
+        -> A session means saving all the fields in SuperType User and SubType Lender
+ * As a lender, I want to have the option to save a session before quitting
  
- - As a borrower, I want to be able to see how much money I have borrowed and also be able to pay it
- - As a borrower, I want to be able to see how much interest I need to pay and also be able to pay it
+ - As a borrower, I want to be able to see how much money I owe 
+ - As a borrower, I want to be able to pay off my debt
+ - As a borrower, I want to be able to see how much interest I owe 
+ - As a borrower, I want to be able to pay off my Interest
+ 
+ 
  
 

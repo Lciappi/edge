@@ -30,8 +30,8 @@ public class Lender extends User {
         return super.getBalance();
 
     }
-    //TODO: Please add tests to this function
-    //EFFECTS allows loan to be valid
+
+    //EFFECTS if lender can afford the loan, call loanmoney function, add borrower to portfolio
     //MODIFIES: this
     public void processLoan(Borrower finalist) {
 

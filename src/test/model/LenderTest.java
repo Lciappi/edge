@@ -7,10 +7,12 @@ import org.junit.jupiter.api.Test;
 
 public class LenderTest {
     private Lender testUser;
+    private Borrower testBorrower;
 
     @BeforeEach
     void setUp() {
         testUser = new Lender(1, "Leonardo");
+        testBorrower = new Borrower(2, "Lucca");
     }
 
     @Test
@@ -37,8 +39,6 @@ public class LenderTest {
         assertTrue(testUser.getPortfolio().contains(b3));
     }
 
-
-
     @Test
     void testLoanPassMoney(){
         testUser.deposit(1000);
@@ -50,5 +50,32 @@ public class LenderTest {
         assertEquals(33.93, testUser.getPotentialInterest());
 
     }
+
+    @Test
+    void processLoanTestPass(){
+        testUser.deposit(2000);
+        testBorrower.loan(500);
+
+        testUser.processLoan(testBorrower);
+
+        assertEquals(1, testUser.getPortfolio().size());
+        assertEquals(1500, testUser.getBalance());
+        assertEquals(500, testUser.getAmountLent());
+
+    }
+
+    @Test
+    void processLoanTestFail(){
+        testUser.deposit(2000);
+        testBorrower.loan(3500);
+
+        testUser.processLoan(testBorrower);
+
+        assertEquals(0, testUser.getPortfolio().size());
+        assertEquals(2000, testUser.getBalance());
+        assertEquals(0, testUser.getAmountLent());
+
+    }
+
 
 }

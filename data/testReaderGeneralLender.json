@@ -1,0 +1,27 @@
+{
+    "portfolio": [
+        {
+          "id": 3,
+          "balance": 51.32,
+          "name": "Mayer",
+          "interestRate": 0.05,
+          "amountBorrowed": 500,
+          "riskScore": 1,
+          "interestOwed": 25
+        },
+        {
+          "id": 4,
+          "balance": 23.2,
+          "name": "Pino",
+          "interestRate": 0.05,
+          "amountBorrowed": 500,
+          "riskScore": 4,
+          "interestOwed": 25
+        }
+    ],
+  "id": 2,
+  "balance": 256456.32,
+  "name": "John",
+  "potentialInterest": 50,
+  "amountLent": 1000
+}

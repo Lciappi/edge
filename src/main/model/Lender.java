@@ -1,16 +1,19 @@
 package model;
 
-import com.sun.xml.internal.bind.v2.TODO;
-import sun.awt.image.ImageWatched;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.LinkedList;
 
 // Creates a type of edge user that can lend out their money
-public class Lender extends User {
+public class Lender extends User implements Writable {
 
-    private double potentialInterest;         // interest that will eventually be collected when loan ends
-    private double amountLent;               // how much money has been lent out
-    private LinkedList<Borrower> portfolio; // who the lender has given money to
+
+
+    private double potentialInterest;          // interest that will eventually be collected when loan ends
+    private double amountLent;                // how much money has been lent out
+    private LinkedList<Borrower> portfolio;  // who the lender has given money to
 
     //REQUIRES: id must be unique positive integer and name should be at least size 1
     //EFFECTS: instantiates linkedlist, sets id and name in supertype
@@ -58,7 +61,45 @@ public class Lender extends User {
         return portfolio;
     }
 
+    // toJson and portfolioToJson from SerializationDemo
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("id", this.getId());
+        json.put("name", this.getUserName());
+        json.put("balance", this.getBalance());
+
+        json.put("potentialInterest", this.getPotentialInterest());
+        json.put("amountLent", this.getAmountLent());
+        json.put("portfolio", portfolioToJson());
+
+        return json;
+    }
+
+    // EFFECTS: returns portfolio as a JSON Array with JSON objects
+    public JSONArray portfolioToJson() {
+
+        JSONArray jsonArray = new JSONArray();
+
+        for (Borrower b : portfolio) {
+            jsonArray.put(b.toJson());
+        }
+
+        return jsonArray;
+
+    }
     public double getAmountLent() {
         return Math.round(amountLent * 100) / 100D;
     }
+
+    public void setPotentialInterest(double potentialInterest) {
+        this.potentialInterest = potentialInterest;
+    }
+
+    public void setAmountLent(double amountLent) {
+        this.amountLent = amountLent;
+    }
+
+
+
 }

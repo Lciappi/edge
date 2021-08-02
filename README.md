@@ -37,11 +37,11 @@ require finance knowledge, and that is why this project may be helpful in the fu
  - As a user, I want to be able to set my name
  - As a user, I want to be able to see the balance in my account
  
- 
  - As a lender, I want to be able to add a borrower to my portfolio
  - As a lender, I want to be able to view the list of borrowers on my portfolio
  - As a lender, I want to be able to view the interest I have collected
  - As a lender, I want to be able to see how much money I have lent out
+ - As a lender, I want to be able to select a borrower and process the loan
  * As a lender, I want to be able to choose between loading previous session or reset memory
         -> A session means saving all the fields in SuperType User and SubType Lender
  * As a lender, I want to have the option to save a session before quitting

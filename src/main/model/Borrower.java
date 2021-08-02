@@ -1,12 +1,15 @@
 package model;
 
-// a type of edge user that can borrow money
-public class Borrower extends User {
+import org.json.JSONObject;
+import persistence.Writable;
+
+// A type of edge user that can borrow money
+public class Borrower extends User implements Writable {
 
 
-    private double interestRate;  //cost of borrowing money as a percentage
+    private double interestRate;     //cost of borrowing money as a percentage
     private double amountBorrowed;   //amount of money borrowed
-    private double riskScore;     //how risky the user is (based on number of loans & payments)
+    private double riskScore;        //how risky the user is (based on number of loans & payments)
     private double interestOwed;  //how much money they owe in interest payments
 
     //REQUIRES: id must be a unique positive integer that has not been used before
@@ -66,6 +69,25 @@ public class Borrower extends User {
 
     }
 
+    //EFFECTS: Converts borrower object to JsonObject
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+
+        json.put("id", this.getId());
+        json.put("name", this.getUserName());
+        json.put("balance", this.getBalance());
+
+        json.put("interestRate", this.getInterestRate());
+        json.put("amountBorrowed", this.getAmountBorrowed());
+        json.put("riskScore", this.getRiskScore());
+        json.put("interestOwed", this.getInterestOwed());
+
+        return json;
+    }
+
+
+    //getters and setters
     public double getRiskScore() {
         return riskScore;
     }
@@ -82,5 +104,19 @@ public class Borrower extends User {
         return amountBorrowed;
     }
 
+    public void setInterestRate(double interestRate) {
+        this.interestRate = interestRate;
+    }
 
+    public void setAmountBorrowed(double amountBorrowed) {
+        this.amountBorrowed = amountBorrowed;
+    }
+
+    public void setRiskScore(double riskScore) {
+        this.riskScore = riskScore;
+    }
+
+    public void setInterestOwed(double interestOwed) {
+        this.interestOwed = interestOwed;
+    }
 }

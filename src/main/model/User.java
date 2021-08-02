@@ -3,8 +3,6 @@ package model;
 // A class for all the users of the Edge platform
 public class User {
 
-
-
     private int id;                  // unique userid
     private String userName;        // name of investor
     private double balance;        // amount of money in the account
@@ -48,6 +46,10 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     public String getName() {

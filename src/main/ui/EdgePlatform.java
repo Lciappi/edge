@@ -4,6 +4,8 @@ package ui;
 import model.Borrower;
 import model.Lender;
 import model.User;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -26,10 +28,10 @@ public class EdgePlatform {
     public void runApp() {
         Boolean run = true;
         init();
-        System.out.println("Welcome to the Edge Platform!");
+        System.out.println("Welcome to the Peer to Peer Lending Platform");
         System.out.println("What is your name?:");
         String name = input.next();
-        System.out.println(name + " would you like to borrow(type '1') money or lend(type '2') money?");
+        System.out.println(name + " would you like to borrow(1) money or lend(2) money? # only lend can save session");
         String type = input.next();
         while (run) {
             if (type.equals("1")) {
@@ -44,6 +46,8 @@ public class EdgePlatform {
             }
         }
     }
+
+
 
     //MODIFIES: this
     //EFFECTS: instantiates borrower and runs different menus depending on input
@@ -61,7 +65,7 @@ public class EdgePlatform {
                 command = input.next();
                 processBorrowCommand(command);
             } else if (command.equals("q")) {
-                run = false;
+                run = endEdge();
             } else {
                 processCommonMenu(command, borrower);
             }
@@ -176,7 +180,7 @@ public class EdgePlatform {
     }
 
 
-    //doDepsosit taken from teller class
+    //doDepsosit adapted from teller class
     // MODIFIES: this
     // EFFECTS: conducts a deposit transaction
     private void doDeposit(User u) {
@@ -243,22 +247,20 @@ public class EdgePlatform {
     }
 
     //MODIFIES: this
-    //EFFECTS: allows lenders to lend money
+    //EFFECTS: allows lenders to lend money and gives option to recover session
     private void runLend(String name) {
         boolean run = true;
-        String command = null;
-        lender = new Lender(availableBorrowers.size() + 1, name);
-
+        loadDataPrompt(name);
         while (run) {
             displayCommonMenu();
-            command = input.next();
+            String command = input.next();
             command = command.toLowerCase();
             if (command.equals("4")) {
                 displayLenderMenu();
                 command = input.next();
                 processLenderCommand(command);
             } else if (command.equals("q")) {
-                run = false;
+                run = endEdge();
             } else {
                 processCommonMenu(command, lender);
             }
@@ -266,6 +268,27 @@ public class EdgePlatform {
         System.out.println("\nGoodbye!");
     }
 
+    //MODIFIES: lender
+    //EFFECTS: loads data prompt from json
+    public void loadDataPrompt(String name) {
+
+        System.out.println("Do you want to load the previous session? ");
+        System.out.println("Yes(1), No(2)");
+        String decision = input.next();
+        if (decision.equals("1")) {
+            try {
+                JsonReader reader = new JsonReader("./data/lender.json");
+                lender = reader.read();
+
+            } catch (Exception e) {
+                System.out.println("File not found");
+            }
+        } else {
+            lender = new Lender(availableBorrowers.size() + 1, name);
+        }
+
+
+    }
 
     //EFFECTS: Display menu
     private void viewPortfolio() {
@@ -285,7 +308,7 @@ public class EdgePlatform {
     }
 
     //EFFECTS: allows lender to choose borrower
-    //MODIFIES: this
+    //MODIFIES: this, Lender
     private void chooseBorrower() {
         int counter = 0;
         System.out.println("Please choose a borrower, Or, press 'q' to cancel: ");
@@ -304,8 +327,29 @@ public class EdgePlatform {
         }
     }
 
+    //MODIFIES: this, lender.json
+    //EFFECTS: saves lender to json if user wants to
+    public Boolean endEdge() {
+        System.out.println("Do you want to save the session?");
+        System.out.println("Yes(1), No(2)");
+        String reader = input.next();
+        if (reader.equals("1")) {
+            try {
+                JsonWriter edgarAllenPoe = new JsonWriter("./data/lender.json");
 
-
+                edgarAllenPoe.open();
+                edgarAllenPoe.write(lender);
+                edgarAllenPoe.close();
+                System.out.println("Session was saved");
+            } catch (Exception e) {
+                System.out.println("The file could not be saved");
+            }
+        } else  {
+            System.out.println("Session was not saved");
+        }
+        System.out.println("Have a great day!");
+        return false;
+    }
 
 
     //MODIFIES: This

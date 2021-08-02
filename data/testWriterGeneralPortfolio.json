@@ -1,0 +1,27 @@
+{
+    "balance": 0,
+    "portfolio": [
+        {
+            "interestRate": 1,
+            "balance": 0,
+            "name": "Brown",
+            "amountBorrowed": 0,
+            "interestOwed": 0,
+            "id": 13,
+            "riskScore": 0
+        },
+        {
+            "interestRate": 1,
+            "balance": 0,
+            "name": "Baptiste",
+            "amountBorrowed": 0,
+            "interestOwed": 0,
+            "id": 16,
+            "riskScore": 0
+        }
+    ],
+    "name": "Zach",
+    "amountLent": 0,
+    "potentialInterest": 0,
+    "id": 12
+}

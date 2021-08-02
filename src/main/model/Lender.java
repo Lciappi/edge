@@ -88,6 +88,7 @@ public class Lender extends User implements Writable {
         return jsonArray;
 
     }
+
     public double getAmountLent() {
         return Math.round(amountLent * 100) / 100D;
     }

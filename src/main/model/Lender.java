@@ -2,14 +2,13 @@ package model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import persistence.JsonWriter;
 import persistence.Writable;
 
 import java.util.LinkedList;
 
 // Creates a type of edge user that can lend out their money
 public class Lender extends User implements Writable {
-
-
 
     private double potentialInterest;          // interest that will eventually be collected when loan ends
     private double amountLent;                // how much money has been lent out
@@ -36,14 +35,16 @@ public class Lender extends User implements Writable {
 
     //EFFECTS if lender can afford the loan, call loanmoney function, add borrower to portfolio
     //MODIFIES: this
-    public void processLoan(Borrower finalist) {
+    public Boolean processLoan(Borrower finalist) {
 
         if (finalist.getAmountBorrowed() <= this.getBalance()) {
             this.addBorrower(finalist);
             this.loanMoney(finalist.getAmountBorrowed(), finalist.getInterestOwed());
             System.out.println(finalist.getName() + " has been added to your portfolio");
+            return true;
         } else {
             System.out.println("You have insufficient funds to write this loan");
+            return false;
         }
     }
 
@@ -62,6 +63,7 @@ public class Lender extends User implements Writable {
     }
 
     // toJson and portfolioToJson from SerializationDemo
+    // TODO
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -101,6 +103,15 @@ public class Lender extends User implements Writable {
         this.amountLent = amountLent;
     }
 
+    public void saveFile() {
+        JsonWriter edgarAllenPoe = new JsonWriter("./data/lender.json");
+        try {
+            edgarAllenPoe.open();
+            edgarAllenPoe.write(this);
+            edgarAllenPoe.close();
 
-
+        } catch (Exception e) {
+            System.out.println("Could not save file");
+        }
+    }
 }

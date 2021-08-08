@@ -1,16 +1,36 @@
 {
-    "balance": 1600,
-    "portfolio": [{
-        "interestRate": 2,
-        "balance": 1400,
-        "name": "Igor",
-        "amountBorrowed": 1400,
-        "interestOwed": 14,
-        "id": 1,
-        "riskScore": 100
-    }],
-    "name": "Leonardo",
-    "amountLent": 1400,
-    "potentialInterest": 14,
+    "balance": 5507,
+    "portfolio": [
+        {
+            "interestRate": 2,
+            "balance": 1400,
+            "name": "Igor",
+            "amountBorrowed": 1400,
+            "interestOwed": 14,
+            "id": 1,
+            "riskScore": 100
+        },
+        {
+            "interestRate": 4,
+            "balance": 5200,
+            "name": "Matthew",
+            "amountBorrowed": 5000,
+            "interestOwed": 44,
+            "id": 1,
+            "riskScore": 188.8176638176638
+        },
+        {
+            "interestRate": 8,
+            "balance": 1625,
+            "name": "John",
+            "amountBorrowed": 1625,
+            "interestOwed": 31.900000000000002,
+            "id": 1,
+            "riskScore": 300
+        }
+    ],
+    "name": "Wasd",
+    "amountLent": 8025,
+    "potentialInterest": 89.9,
     "id": 4
 }

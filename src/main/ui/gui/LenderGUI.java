@@ -26,12 +26,16 @@ public class LenderGUI extends UserInterface implements ActionListener {
         this.loadData = loadData;
         init();
         columnNames = new String[]{"Name", "Amount Borrowed", "Interest Owed"};
+        guiElements();
 
         checkNLoadData();
-        guiElements();
         displayUserInfo();
         displayLenderInfo();
         displayTable(columnNames, lender.getPortfolio());
+
+        add(addBorrower, BOTTOM_ALIGNMENT);
+        add(amountLent, CENTER_ALIGNMENT);
+        add(amountInterest, CENTER_ALIGNMENT);
 
         pack();
         setLocationRelativeTo(null);
@@ -49,19 +53,28 @@ public class LenderGUI extends UserInterface implements ActionListener {
             lender.setUserName(name);
             fixName(name);
         }
-
         if (e.getActionCommand().equals("addBorrower")) {
-            new AddBorrowerGUI(lender, this);
-            System.out.println("Add Borrowers");
-            this.dispose();
+            if (lender.getName() == null) {
+                JOptionPane.showMessageDialog(this, "Must add your name first");
+            } else {
+                new AddBorrowerGUI(lender, this);
+                System.out.println("Add Borrowers");
+                this.dispose();
+            }
         }
-
         if (e.getActionCommand().equals("Deposit")) {
-            depositButton(lender);
+            if (lender.getName() == null) {
+                JOptionPane.showMessageDialog(this, "Must add your name first");
+            } else {
+                depositButton(lender);
+            }
         }
-
         if (e.getActionCommand().equals("Withdraw")) {
-            withdrawButton(lender);
+            if (lender.getName() == null) {
+                JOptionPane.showMessageDialog(this, "Must add your name first");
+            } else {
+                withdrawButton(lender);
+            }
         }
     }
 
@@ -73,9 +86,6 @@ public class LenderGUI extends UserInterface implements ActionListener {
         addBorrower.setActionCommand("addBorrower");
         addBorrower.addActionListener(this);
 
-        add(amountLent);
-        add(amountInterest);
-        add(addBorrower);
 
     }
 
@@ -94,7 +104,7 @@ public class LenderGUI extends UserInterface implements ActionListener {
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setPreferredSize(new Dimension(1024, 720));
-        ((JPanel) getContentPane()).setBorder(new EmptyBorder(500, 350, 500, 350));
+        ((JPanel) getContentPane()).setBorder(new EmptyBorder(10, 10, 10, 10));
         setLayout(new FlowLayout());
 
 
@@ -115,12 +125,11 @@ public class LenderGUI extends UserInterface implements ActionListener {
         withdraw.setActionCommand("Withdraw");
         withdraw.addActionListener(this);
 
-
-        add(deposit);
-        add(withdraw);
-        add(nameField);
-        add(editName);
-        add(greetLabel);
+        add(greetLabel,LEFT_ALIGNMENT);
+        add(deposit, LEFT_ALIGNMENT);
+        add(withdraw, LEFT_ALIGNMENT);
+        add(nameField, TOP_ALIGNMENT);
+        add(editName, TOP_ALIGNMENT);
 
     }
 
@@ -141,4 +150,7 @@ public class LenderGUI extends UserInterface implements ActionListener {
         }
     }
 
+    public JLabel getGreetLabel() {
+        return greetLabel;
+    }
 }

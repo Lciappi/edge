@@ -97,17 +97,24 @@ public class UserInterface extends JFrame {
     //EFFECTS: Displays user information
     protected void displayUserInfo() {
         balance.setText("Balance: " + lender.getBalance());
-        add(balance);
+        balance.setForeground(Color.red);
+        add(balance, RIGHT_ALIGNMENT);
 
     }
 
     //EFFECTS: manages deposits, updates balance in gui
     //MODIFIES: this, User
     protected void depositButton(User u) {
+
         JLabel c = new JLabel("Please enter amount to deposit");
         String input = JOptionPane.showInputDialog(c);
-        u.deposit(Double.parseDouble(input));
-        balance.setText("Balance: " + u.getBalance());
+        try {
+            u.deposit(Double.parseDouble(input));
+            balance.setText("Balance: " + u.getBalance());
+        } catch (Exception e) {
+            System.out.println("Unexpected Action");
+        }
+
     }
 
     //EFFECTS: manages withdraws, updates balance in gui
@@ -115,12 +122,16 @@ public class UserInterface extends JFrame {
     protected void withdrawButton(User u) {
         JLabel c  = new JLabel("Please enter amount to withdraw");
         String input = JOptionPane.showInputDialog(c);
-        if (u.withdraw(Double.parseDouble(input))) {
-            JOptionPane.showMessageDialog(this,"Success!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Failure! Insufficient funds");
+        try {
+            if (u.withdraw(Double.parseDouble(input))) {
+                JOptionPane.showMessageDialog(this, "Success!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Failure! Insufficient funds");
+            }
+            balance.setText("Balance: " + u.getBalance());
+        } catch (Exception e) {
+            System.out.println("Unexpected Action");
         }
-        balance.setText("Balance: " + u.getBalance());
     }
 
 }

@@ -24,6 +24,8 @@ public class LenderGUI extends UserInterface implements ActionListener {
     public LenderGUI(Boolean loadData) {
         super("Lender GUI");
         this.loadData = loadData;
+
+
         init();
         columnNames = new String[]{"Name", "Amount Borrowed", "Interest Owed"};
         guiElements();
@@ -41,12 +43,15 @@ public class LenderGUI extends UserInterface implements ActionListener {
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(true);
+        this.add(new JLabel(new ImageIcon("data/logo.png")));
 
         manageExitPrompt(lender);
     }
 
 
     //EFFECTS: manages events
+    //DISCLAIMER: This methods couldn't be shorter without very small and unnecessary methods
+    @SuppressWarnings("checkstyle:MethodLength")
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("changeName")) {
             String name = nameField.getText();
@@ -103,9 +108,10 @@ public class LenderGUI extends UserInterface implements ActionListener {
     private void init() {
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        setPreferredSize(new Dimension(1024, 720));
+        setPreferredSize(new Dimension(1024, 600));
         ((JPanel) getContentPane()).setBorder(new EmptyBorder(10, 10, 10, 10));
         setLayout(new FlowLayout());
+        this.setLocationRelativeTo(null);
 
 
     }
@@ -150,7 +156,5 @@ public class LenderGUI extends UserInterface implements ActionListener {
         }
     }
 
-    public JLabel getGreetLabel() {
-        return greetLabel;
-    }
+
 }

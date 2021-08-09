@@ -47,7 +47,7 @@ public class LoadDataPromptGUI extends JFrame implements ActionListener {
         greetLabel = new JLabel("Do you want to load the previous session?");
         greetLabel2 = new JLabel("Welcome to the Platform");
 
-        this.add(new JLabel(new ImageIcon("src/main/ui/gui/logo.png")));
+        this.add(new JLabel(new ImageIcon("data/logo.png")));
 
         add(greetLabel2);
         add(greetLabel);

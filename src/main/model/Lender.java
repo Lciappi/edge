@@ -54,16 +54,9 @@ public class Lender extends User implements Writable {
         this.portfolio.add(client);
     }
 
-    public double getPotentialInterest() {
-        return potentialInterest;
-    }
-
-    public LinkedList<Borrower> getPortfolio() {
-        return portfolio;
-    }
-
     // toJson and portfolioToJson from SerializationDemo
-    // TODO
+
+    //EFFECTS: converts this to json object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -91,6 +84,20 @@ public class Lender extends User implements Writable {
 
     }
 
+    //MODIFIES: lender.json
+    //EFFECTS: saves this object to json file
+    public void saveFile() {
+        JsonWriter edgarAllenPoe = new JsonWriter("./data/lender.json");
+        try {
+            edgarAllenPoe.open();
+            edgarAllenPoe.write(this);
+            edgarAllenPoe.close();
+
+        } catch (Exception e) {
+            System.out.println("Could not save file");
+        }
+    }
+
     public double getAmountLent() {
         return Math.round(amountLent * 100) / 100D;
     }
@@ -103,15 +110,12 @@ public class Lender extends User implements Writable {
         this.amountLent = amountLent;
     }
 
-    public void saveFile() {
-        JsonWriter edgarAllenPoe = new JsonWriter("./data/lender.json");
-        try {
-            edgarAllenPoe.open();
-            edgarAllenPoe.write(this);
-            edgarAllenPoe.close();
-
-        } catch (Exception e) {
-            System.out.println("Could not save file");
-        }
+    public double getPotentialInterest() {
+        return potentialInterest;
     }
+
+    public LinkedList<Borrower> getPortfolio() {
+        return portfolio;
+    }
+
 }

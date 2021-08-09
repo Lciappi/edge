@@ -20,15 +20,12 @@ public class AddBorrowerGUI extends UserInterface implements ActionListener {
     private LenderGUI back;
 
     //EFFECTS: constructor class
-    //MODIFIES: this, super
+    //MODIFIES: this, UserInterface
     public AddBorrowerGUI(Lender lender, LenderGUI back) {
         super("Add Borrower");
         this.lender = lender;
         this.back = back;
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(800, 600));
-        ((JPanel) getContentPane()).setBorder(new EmptyBorder(50, 50, 50, 50));
-        setLayout(new FlowLayout());
+
 
         guiElements();
 
@@ -38,6 +35,7 @@ public class AddBorrowerGUI extends UserInterface implements ActionListener {
     }
 
     //EFFECTS: manages events
+    //MODIFIES: UserInterface
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("submitLoan")) {
             Borrower candidate = availableBorrowers.get(table.getSelectedRow());
@@ -61,8 +59,15 @@ public class AddBorrowerGUI extends UserInterface implements ActionListener {
         }
     }
 
-    //EFFECTS: initalizes and adds gui elements to panel
+    //EFFECTS: initializes and adds gui elements to panel
+    //MODIFIES: this
     public void guiElements() {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setPreferredSize(new Dimension(800, 600));
+        ((JPanel) getContentPane()).setBorder(new EmptyBorder(50, 50, 50, 50));
+        setLayout(new FlowLayout());
+        this.setLocationRelativeTo(null);
+
         instructions = new JLabel("Please select a borrower to add to your portfolio");
         tittleLabel = new JLabel("Add Borrowers to Portfolio");
         submitLoan = new JButton("Grant Loan");
@@ -73,8 +78,6 @@ public class AddBorrowerGUI extends UserInterface implements ActionListener {
         exit = new JButton("Go back");
         exit.setActionCommand("exit");
         exit.addActionListener(this);
-
-
         String[] columnNames = {"Name", "Amount Requested", "Potential Interest", "Risk Score"};
 
         add(tittleLabel, TOP_ALIGNMENT);
@@ -83,7 +86,5 @@ public class AddBorrowerGUI extends UserInterface implements ActionListener {
         add(submitLoan, BOTTOM_ALIGNMENT);
         add(exit, BOTTOM_ALIGNMENT);
         add(instructions);
-
-
     }
 }

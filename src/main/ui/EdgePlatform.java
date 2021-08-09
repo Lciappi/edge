@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
-// edge platform user interface
+// Old UI used for console interface
 public class EdgePlatform {
     private Scanner input;
     private Borrower borrower;
@@ -298,11 +298,13 @@ public class EdgePlatform {
         }
     }
 
+    //EFFECTS: prints accrued interest
     private void viewInterestAccrued() {
         System.out.println("You have earned: " + lender.getPotentialInterest());
 
     }
 
+    //EFFECTS: prints loaned amount
     private void viewLoanedAmount() {
         System.out.println("You have lent out: " + lender.getAmountLent());
     }

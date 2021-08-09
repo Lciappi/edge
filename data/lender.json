@@ -1,6 +1,42 @@
 {
-    "balance": 107,
+    "balance": 700,
     "portfolio": [
+        {
+            "interestRate": 4,
+            "balance": 5200,
+            "name": "Matthew",
+            "amountBorrowed": 5000,
+            "interestOwed": 44,
+            "id": 1,
+            "riskScore": 188.8176638176638
+        },
+        {
+            "interestRate": 2,
+            "balance": 1400,
+            "name": "Igor",
+            "amountBorrowed": 1400,
+            "interestOwed": 14,
+            "id": 1,
+            "riskScore": 100
+        },
+        {
+            "interestRate": 8,
+            "balance": 1625,
+            "name": "John",
+            "amountBorrowed": 1625,
+            "interestOwed": 31.900000000000002,
+            "id": 1,
+            "riskScore": 300
+        },
+        {
+            "interestRate": 4,
+            "balance": 5200,
+            "name": "Matthew",
+            "amountBorrowed": 5000,
+            "interestOwed": 44,
+            "id": 1,
+            "riskScore": 188.8176638176638
+        },
         {
             "interestRate": 2,
             "balance": 1400,
@@ -45,10 +81,118 @@
             "interestOwed": 44,
             "id": 1,
             "riskScore": 188.8176638176638
+        },
+        {
+            "interestRate": 4,
+            "balance": 5200,
+            "name": "Matthew",
+            "amountBorrowed": 5000,
+            "interestOwed": 44,
+            "id": 1,
+            "riskScore": 188.8176638176638
+        },
+        {
+            "interestRate": 4,
+            "balance": 5200,
+            "name": "Matthew",
+            "amountBorrowed": 5000,
+            "interestOwed": 44,
+            "id": 1,
+            "riskScore": 188.8176638176638
+        },
+        {
+            "interestRate": 8,
+            "balance": 1625,
+            "name": "John",
+            "amountBorrowed": 1625,
+            "interestOwed": 31.900000000000002,
+            "id": 1,
+            "riskScore": 300
+        },
+        {
+            "interestRate": 8,
+            "balance": 1625,
+            "name": "John",
+            "amountBorrowed": 1625,
+            "interestOwed": 31.900000000000002,
+            "id": 1,
+            "riskScore": 300
+        },
+        {
+            "interestRate": 4,
+            "balance": 5200,
+            "name": "Matthew",
+            "amountBorrowed": 5000,
+            "interestOwed": 44,
+            "id": 1,
+            "riskScore": 188.8176638176638
+        },
+        {
+            "interestRate": 2,
+            "balance": 1400,
+            "name": "Igor",
+            "amountBorrowed": 1400,
+            "interestOwed": 14,
+            "id": 1,
+            "riskScore": 100
+        },
+        {
+            "interestRate": 8,
+            "balance": 1625,
+            "name": "John",
+            "amountBorrowed": 1625,
+            "interestOwed": 31.900000000000002,
+            "id": 1,
+            "riskScore": 300
+        },
+        {
+            "interestRate": 2,
+            "balance": 1400,
+            "name": "Igor",
+            "amountBorrowed": 1400,
+            "interestOwed": 14,
+            "id": 1,
+            "riskScore": 100
+        },
+        {
+            "interestRate": 4,
+            "balance": 5200,
+            "name": "Matthew",
+            "amountBorrowed": 5000,
+            "interestOwed": 44,
+            "id": 1,
+            "riskScore": 188.8176638176638
+        },
+        {
+            "interestRate": 8,
+            "balance": 1625,
+            "name": "John",
+            "amountBorrowed": 1625,
+            "interestOwed": 31.900000000000002,
+            "id": 1,
+            "riskScore": 300
+        },
+        {
+            "interestRate": 8,
+            "balance": 1625,
+            "name": "John",
+            "amountBorrowed": 1625,
+            "interestOwed": 31.900000000000002,
+            "id": 1,
+            "riskScore": 300
+        },
+        {
+            "interestRate": 8,
+            "balance": 1625,
+            "name": "John",
+            "amountBorrowed": 1625,
+            "interestOwed": 31.900000000000002,
+            "id": 1,
+            "riskScore": 300
         }
     ],
-    "name": "Wasd",
-    "amountLent": 14425,
-    "potentialInterest": 147.9,
+    "name": "Leonardo",
+    "amountLent": 60000,
+    "potentialInterest": 677.1999999999999,
     "id": 4
 }

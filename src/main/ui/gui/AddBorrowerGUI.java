@@ -42,9 +42,12 @@ public class AddBorrowerGUI extends UserInterface implements ActionListener {
         if (e.getActionCommand().equals("submitLoan")) {
             Borrower candidate = availableBorrowers.get(table.getSelectedRow());
             if (lender.processLoan(candidate)) {
+                playSound("data/depositName.wav");
                 JOptionPane.showMessageDialog(this, "Success!" + candidate.getAmountBorrowed()
                         + " were lent to " + candidate.getAmountBorrowed());
+                balance.setText(Double.toString(lender.getBalance()));
             } else {
+                playSound("data/withdraw.wav");
                 JOptionPane.showMessageDialog(this,"Error! Insufficient Funds");
             }
 

@@ -2,6 +2,8 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import exceptions.InsufficientFundsException;
+import exceptions.NegativeNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +20,7 @@ public class LenderTest {
     @Test
     void testConstructor() {
         assertEquals( 0, testUser.getBalance());
-        assertEquals(1, testUser.getId());
+        assertEquals(2, testUser.getId());
         assertEquals("Leonardo", testUser.getName());
 
     }
@@ -42,40 +44,49 @@ public class LenderTest {
     @Test
     void testLoanPassMoney(){
         testUser.deposit(1000);
+        try {
+            assertEquals(321.4, testUser.loanMoney(678.6, 33.93));
 
-        assertEquals(321.4, testUser.loanMoney(678.6,33.93));
-
-        assertEquals(321.4, testUser.getBalance());
-        assertEquals(678.6, testUser.getAmountLent());
-        assertEquals(33.93, testUser.getPotentialInterest());
-
+            assertEquals(321.4, testUser.getBalance());
+            assertEquals(678.6, testUser.getAmountLent());
+            assertEquals(33.93, testUser.getPotentialInterest());
+        } catch (InsufficientFundsException exception) {
+            fail("Should have enough funds");
+        } catch (NegativeNumberException exception) {
+            fail("Should be positive number");
+        }
     }
 
     @Test
     void processLoanTestPass(){
         testUser.deposit(2000);
         testBorrower.loan(500);
+        try {
+            testUser.processLoan(testBorrower);
 
-        testUser.processLoan(testBorrower);
-
-        assertEquals(1, testUser.getPortfolio().size());
-        assertEquals(1500, testUser.getBalance());
-        assertEquals(500, testUser.getAmountLent());
-
+            assertEquals(1, testUser.getPortfolio().size());
+            assertEquals(1500, testUser.getBalance());
+            assertEquals(500, testUser.getAmountLent());
+        } catch (InsufficientFundsException exception) {
+            fail("Should have Enough funds");
+        }
     }
 
     @Test
     void processLoanTestFail(){
         testUser.deposit(2000);
         testBorrower.loan(3500);
+        try {
+            testUser.processLoan(testBorrower);
+            fail("Shoulud have thrown exception");
+            assertEquals(0, testUser.getPortfolio().size());
+            assertEquals(2000, testUser.getBalance());
+            assertEquals(0, testUser.getAmountLent());
+        } catch (InsufficientFundsException exception) {
 
-        testUser.processLoan(testBorrower);
-
-        assertEquals(0, testUser.getPortfolio().size());
-        assertEquals(2000, testUser.getBalance());
-        assertEquals(0, testUser.getAmountLent());
-
+        }
     }
+
 
 
 }

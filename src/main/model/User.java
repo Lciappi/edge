@@ -1,5 +1,9 @@
 package model;
 
+import exceptions.InsufficientFundsException;
+import exceptions.NegativeNumberException;
+import exceptions.RuntimeNegativeNumberException;
+
 // A class for all the users of the Edge platform
 public class User {
 
@@ -15,26 +19,30 @@ public class User {
         this.userName = name;
     }
 
-    //REQUIRES: amount must be a positive double
     //MODIFIES: this
-    //EFFECTS: increase balance by amount
-    public void deposit(double amount) {
+    //EFFECTS: increase balance by amount, throws negative exception if amount is negative
+    //         I choose deposit to throw a runtime exception instead of a check exception because
+    //         deposit is sometimes used as setBalance(), which means amount will not be negative(not set by user)
+    public void deposit(double amount) throws RuntimeNegativeNumberException {
+        if (amount < 0) {
+            throw new RuntimeNegativeNumberException("Cannot deposit Negative Number");
+        }
         this.balance += amount;
     }
 
-    //REQUIRES: amount to be greater than 0
     //MODIFIES: this
     //EFFECTS: if amount is smaller than balance
     //         - then it removes amount from balance
     //         - returns true
     //         otherwise, not then it only returns false
-    public boolean withdraw(double amount) {
-
+    public void withdraw(double amount) throws InsufficientFundsException, NegativeNumberException {
+        if (amount <= 0) {
+            throw new NegativeNumberException("Cannot withdraw negative or Zero amount");
+        }
         if (amount <= balance) {
             balance = balance - amount;
-            return true;
         } else {
-            return false;
+            throw new InsufficientFundsException("Insufficient Funds to withdraw");
         }
 
     }

@@ -1,5 +1,8 @@
 package model;
 
+import exceptions.FailedToSaveFileException;
+import exceptions.InsufficientFundsException;
+import exceptions.NegativeNumberException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.JsonWriter;
@@ -14,19 +17,23 @@ public class Lender extends User implements Writable {
     private double amountLent;                // how much money has been lent out
     private LinkedList<Borrower> portfolio;  // who the lender has given money to
 
-    //REQUIRES: id must be unique positive integer and name should be at least size 1
     //EFFECTS: instantiates linkedlist, sets id and name in supertype
-    public Lender(int id, String name) {
-        super(id, name);
+    public Lender(int previousId, String name) {
+        super(previousId + 1, name);
         this.portfolio = new LinkedList<>();
     }
 
-    //REQUIRES: amount >= 0, amount <= balance
     //MODIFIES: this, User
     //EFFECTS: removes amount from balance, adds amount to amountLent, adds interest
     //         returns the user's balance
-    public double loanMoney(double amount, double interest) {
-        super.withdraw(amount);
+    public double loanMoney(double amount, double interest) throws NegativeNumberException, InsufficientFundsException {
+        try {
+            super.withdraw(amount);
+        } catch (InsufficientFundsException e) {
+            throw e;
+        } catch (NegativeNumberException e) {
+            throw e;
+        }
         this.amountLent += amount;
         this.potentialInterest += interest;
         return super.getBalance();
@@ -35,16 +42,16 @@ public class Lender extends User implements Writable {
 
     //EFFECTS if lender can afford the loan, call loanmoney function, add borrower to portfolio
     //MODIFIES: this
-    public Boolean processLoan(Borrower finalist) {
+    public void processLoan(Borrower finalist) throws InsufficientFundsException {
 
-        if (finalist.getAmountBorrowed() <= this.getBalance()) {
+        try {
             this.addBorrower(finalist);
             this.loanMoney(finalist.getAmountBorrowed(), finalist.getInterestOwed());
             System.out.println(finalist.getName() + " has been added to your portfolio");
-            return true;
-        } else {
-            System.out.println("You have insufficient funds to write this loan");
-            return false;
+        } catch (InsufficientFundsException exception) {
+            throw exception;
+        } catch (NegativeNumberException exception) {
+            System.out.println("Cannot lend Negative Number");
         }
     }
 
@@ -86,7 +93,7 @@ public class Lender extends User implements Writable {
 
     //MODIFIES: lender.json
     //EFFECTS: saves this object to json file
-    public void saveFile() {
+    public void saveFile() throws FailedToSaveFileException {
         JsonWriter edgarAllenPoe = new JsonWriter("./data/lender.json");
         try {
             edgarAllenPoe.open();
@@ -94,7 +101,7 @@ public class Lender extends User implements Writable {
             edgarAllenPoe.close();
 
         } catch (Exception e) {
-            System.out.println("Could not save file");
+            throw new FailedToSaveFileException("Failed ot save File");
         }
     }
 

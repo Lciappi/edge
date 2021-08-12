@@ -51,6 +51,34 @@ require finance knowledge, and that is why this project may be helpful in the fu
  - As a borrower, I want to be able to see how much interest I owe 
  - As a borrower, I want to be able to pay off my Interest
  
+ ####Phase 4: Task 2
  
+ For this task I decided to make Lender, and its superclass User, robust through the use of Exceptions. I decided to
+ incorporate 5 exceptions.
+ 
+ - FailedToSaveFileException
+ 
+ This exception is thrown in Lender's toJson method. It is then caught in the user interface and displayed as an
+ error message to alert the user that the file was not properly saved.
+ - InsufficientFundsException
+ 
+ This exception is used both in Lender and User. It is used when the operation that is being performed requires
+ more money than what currently is available in the user's account. Its most intriguing use is in the loanMoney method.
+ LoanMoney throws the insufficient funds exception, but instead of being caught by the method that calls it (procesLoan)
+ it is thrown again, and finally caught in the user interface.
+ - NegativeNumberException
+ 
+ This exception ensures that that methods such as deposit and withdraw do not have negative numbers (which would, for
+ example, allow a withdraw to increase the user's balance).
+ - NoNameException
+ 
+ This was part of an implementation in order to ensure that LenderGUI's method actionPerformed() did not exceed the 
+ checkstyle.
+ - RunTimeNegativeNumberException 
+ 
+ I chose to have a unchecked alternative to NegativeNumberException because for the method deposit, in the user's class,
+ I did not want to add a try and catch everytime deposit is called. This is because deposit is sometimes used as a 
+ "setBalance". So, whenever deposit is used as a setBalance, such as in the JsonWriter class, the exception goes 
+ unchecked, but if deposit handles a user's input, then it will catch the exception and display an error message. 
  
 

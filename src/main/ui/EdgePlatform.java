@@ -1,6 +1,9 @@
 package ui;
 //THE CODE BELOW, WHILE NOT COPIED, IS HEAVILY INSPIRED FROM TELLERAPP EXAMPLE
 
+import exceptions.InsufficientFundsException;
+import exceptions.NegativeNumberException;
+import exceptions.RuntimeNegativeNumberException;
 import model.Borrower;
 import model.Lender;
 import model.User;
@@ -187,10 +190,10 @@ public class EdgePlatform {
         System.out.println("Please enter amount to deposit: ");
         double amount = input.nextDouble();
 
-        if (amount >= 0.0) {
+        try {
             u.deposit(amount);
-        } else {
-            System.out.println("Cannot deposit negative amount...\n");
+        } catch (RuntimeNegativeNumberException e) {
+            System.out.println(e.getMessage());
         }
 
         viewBalance(u);
@@ -202,15 +205,14 @@ public class EdgePlatform {
         System.out.println("Please enter amount to withdraw: ");
         double amount = input.nextDouble();
 
-        if (amount >= 0.0) {
-            if (!u.withdraw(amount)) {
-
-                System.out.println("You have insufficient funds!");
-            }
-
-        } else {
-            System.out.println("Cannot deposit negative amount...\n");
+        try {
+            u.withdraw(amount);
+        } catch (InsufficientFundsException e) {
+            System.out.println(e.getMessage());
+        } catch (NegativeNumberException e) {
+            System.out.println(e.getMessage());
         }
+
         viewBalance(u);
     }
 
@@ -324,8 +326,11 @@ public class EdgePlatform {
         if (command.equals("q")) {
             System.out.println("Leaving ...");
         } else {
-            lender.processLoan(finalist);
-
+            try {
+                lender.processLoan(finalist);
+            } catch (InsufficientFundsException e) {
+                System.out.println("Insufficient funds ");
+            }
         }
     }
 

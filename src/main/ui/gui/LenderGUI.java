@@ -1,5 +1,6 @@
 package ui.gui;
 
+import exceptions.NoNameException;
 import model.Lender;
 import persistence.JsonReader;
 
@@ -25,7 +26,6 @@ public class LenderGUI extends UserInterface implements ActionListener {
         super("Lender GUI");
         this.loadData = loadData;
 
-
         init();
         columnNames = new String[]{"Name", "Amount Borrowed", "Interest Owed"};
         guiElements();
@@ -50,35 +50,28 @@ public class LenderGUI extends UserInterface implements ActionListener {
 
 
     //EFFECTS: manages events
-    //DISCLAIMER: This methods couldn't be shorter without very small and unnecessary methods
-    @SuppressWarnings("checkstyle:MethodLength")
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("changeName")) {
             String name = nameField.getText();
-            lender.setUserName(name);
             fixName(name);
-        }
-        if (e.getActionCommand().equals("addBorrower")) {
-            if (lender.getName() == null) {
+        } else {
+            try {
+                if (lender.getName() == null) {
+                    throw new NoNameException("Lender has no name");
+                } else {
+                    if (e.getActionCommand().equals("addBorrower")) {
+                        new AddBorrowerGUI(lender);
+                        this.dispose();
+                    }
+                    if (e.getActionCommand().equals("Deposit")) {
+                        depositButton(lender);
+                    }
+                    if (e.getActionCommand().equals("Withdraw")) {
+                        withdrawButton(lender);
+                    }
+                }
+            } catch (NoNameException exception) {
                 JOptionPane.showMessageDialog(this, "Must add your name first");
-            } else {
-                new AddBorrowerGUI(lender, this);
-                System.out.println("Add Borrowers");
-                this.dispose();
-            }
-        }
-        if (e.getActionCommand().equals("Deposit")) {
-            if (lender.getName() == null) {
-                JOptionPane.showMessageDialog(this, "Must add your name first");
-            } else {
-                depositButton(lender);
-            }
-        }
-        if (e.getActionCommand().equals("Withdraw")) {
-            if (lender.getName() == null) {
-                JOptionPane.showMessageDialog(this, "Must add your name first");
-            } else {
-                withdrawButton(lender);
             }
         }
     }
@@ -97,6 +90,7 @@ public class LenderGUI extends UserInterface implements ActionListener {
     //modifies:THIS
     //EFFECTS: remove TextFields and Buttons relating to name change
     private void fixName(String name) {
+        lender.setUserName(name);
         editName.setVisible(false);
         nameField.setVisible(false);
         greetLabel.setText("Hi, " + name + ", welcome!");

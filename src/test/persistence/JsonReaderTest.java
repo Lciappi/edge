@@ -30,7 +30,7 @@ public class JsonReaderTest extends JsonTest{
 
             assertEquals("John", rlender.getName());
             assertEquals(1000.32, rlender.getBalance());
-            assertEquals(1, rlender.getId());
+            assertEquals(2, rlender.getId());
             assertEquals(0, rlender.getAmountLent());
             assertEquals(0, rlender.getPotentialInterest());
             assertEquals(0, rlender.getPortfolio().size());
@@ -48,7 +48,7 @@ public class JsonReaderTest extends JsonTest{
 
             assertEquals("John", rlender.getName());
             assertEquals(256456.32, rlender.getBalance());
-            assertEquals(2, rlender.getId());
+            assertEquals(3, rlender.getId());
             assertEquals(1000, rlender.getAmountLent());
             assertEquals(50, rlender.getPotentialInterest());
 
@@ -56,8 +56,8 @@ public class JsonReaderTest extends JsonTest{
             List<Borrower> portfolio = rlender.getPortfolio();
 
             assertEquals(2, rlender.getPortfolio().size());
-            checkBorrower(3, 51.32, "Mayer", 0.05, 500, 1, 25, portfolio.get(0));
-            checkBorrower(4, 23.2, "Pino", 0.05, 500, 4, 25, portfolio.get(1));
+            checkBorrower(4, 51.32, "Mayer", 0.05, 500, 1, 25, portfolio.get(0));
+            checkBorrower(5, 23.2, "Pino", 0.05, 500, 4, 25, portfolio.get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

@@ -1,5 +1,7 @@
 package ui.gui;
 
+import exceptions.FailedToSaveFileException;
+import exceptions.InsufficientFundsException;
 import model.Borrower;
 import model.Lender;
 
@@ -17,15 +19,12 @@ public class AddBorrowerGUI extends UserInterface implements ActionListener {
     private JLabel instructions;
     private JButton submitLoan;
     private JButton exit;
-    private LenderGUI back;
 
     //EFFECTS: constructor class
     //MODIFIES: this, UserInterface
-    public AddBorrowerGUI(Lender lender, LenderGUI back) {
+    public AddBorrowerGUI(Lender lender) {
         super("Add Borrower");
         this.lender = lender;
-        this.back = back;
-
 
         guiElements();
 
@@ -39,23 +38,25 @@ public class AddBorrowerGUI extends UserInterface implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("submitLoan")) {
             Borrower candidate = availableBorrowers.get(table.getSelectedRow());
-            if (lender.processLoan(candidate)) {
+            try {
+                lender.processLoan(candidate);
                 playSound("data/depositName.wav");
                 JOptionPane.showMessageDialog(this, "Success!" + candidate.getAmountBorrowed()
                         + " were lent to " + candidate.getAmountBorrowed());
                 balance.setText(Double.toString(lender.getBalance()));
-            } else {
+            } catch (InsufficientFundsException exc) {
                 playSound("data/withdraw.wav");
                 JOptionPane.showMessageDialog(this,"Error! Insufficient Funds");
             }
-
         }
         if (e.getActionCommand().equals("exit")) {
-            lender.saveFile();
+            try {
+                lender.saveFile();
+            } catch (FailedToSaveFileException exception) {
+                JOptionPane.showMessageDialog(this,"Error! Could not save file");
+            }
             new LenderGUI(true);
             this.dispose();
-
-
         }
     }
 

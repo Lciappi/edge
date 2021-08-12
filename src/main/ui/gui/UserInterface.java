@@ -1,5 +1,10 @@
 package ui.gui;
 
+import exceptions.FailedToSaveFileException;
+import exceptions.InsufficientFundsException;
+import exceptions.NegativeNumberException;
+import exceptions.RuntimeNegativeNumberException;
+import jdk.nashorn.internal.scripts.JO;
 import model.Borrower;
 import model.Lender;
 import model.User;
@@ -55,6 +60,7 @@ public class UserInterface extends JFrame {
     //CODE COPIED FROM: https://stackoverflow.com/questions/15449022/show-prompt-before-closing-jframe
     //EFFECTS: Creates a prompt to ask user if he wants to save the session
     protected void manageExitPrompt(Lender lender) {
+        UserInterface that = this;
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
@@ -64,7 +70,11 @@ public class UserInterface extends JFrame {
                         "Do you want to save the session?","Exit",
                         JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,objButtons,objButtons[1]);
                 if (promptResult == JOptionPane.YES_OPTION) {
-                    lender.saveFile();
+                    try {
+                        lender.saveFile();
+                    } catch (FailedToSaveFileException e) {
+                        JOptionPane.showMessageDialog(that,"Error! Could not save file");
+                    }
                     System.exit(0);
                 } else if (promptResult == JOptionPane.NO_OPTION) {
                     System.exit(0);
@@ -121,6 +131,8 @@ public class UserInterface extends JFrame {
             balance.setText("Balance: " + u.getBalance());
             playSound("data/depositName.wav");
 
+        } catch (RuntimeNegativeNumberException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (Exception e) {
             System.out.println("Unexpected Action");
             e.printStackTrace();
@@ -144,19 +156,21 @@ public class UserInterface extends JFrame {
     //EFFECTS: manages withdraws, updates balance in gui
     //MODIFIES: this, User
     protected void withdrawButton(User u) {
-        JLabel c  = new JLabel("Please enter amount to withdraw");
+        JLabel c = new JLabel("Please enter amount to withdraw");
         String input = JOptionPane.showInputDialog(c);
-        try {
-            if (u.withdraw(Double.parseDouble(input))) {
-                playSound("data/withdraw.wav");
-                JOptionPane.showMessageDialog(this, "Success!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Failure! Insufficient funds");
-            }
-            balance.setText("Balance: " + u.getBalance());
-        } catch (Exception e) {
-            System.out.println("Unexpected Action");
-        }
-    }
 
+        try {
+            u.withdraw(Double.parseDouble(input));
+            playSound("data/withdraw.wav");
+            JOptionPane.showMessageDialog(this, "Success!");
+            balance.setText("Balance: " + u.getBalance());
+        } catch (InsufficientFundsException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (NegativeNumberException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+
+    }
 }

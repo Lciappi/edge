@@ -2,6 +2,8 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import exceptions.InsufficientFundsException;
+import exceptions.NegativeNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,22 +34,38 @@ class UserTest {
     @Test
     void withdrawFailTest(){
         testUser.deposit(1000);
+        try {
+            testUser.withdraw(2120.21);
+            fail("Should throw Exception");
+        } catch (InsufficientFundsException e) {
+        } catch (NegativeNumberException e) {
+            fail("Should not throw negative number exceptiomn");
+        }
 
-        assertFalse(testUser.withdraw(2120.21));
         assertEquals(1000, testUser.getBalance());
-        assertFalse(testUser.withdraw(100000));
+
+        try {
+            testUser.withdraw(100000);
+            fail("Should throw Exception");
+        } catch (InsufficientFundsException e) {
+        } catch (NegativeNumberException e) {
+            fail("Should not throw negative number exceptiomn");
+        }
         assertEquals(1000, testUser.getBalance());
 
     }
 
     @Test
     void withdrawPassTest(){
-        testUser.deposit(2312.65);
-        assertTrue(testUser.withdraw(1000.30));
-        assertEquals(1312.35, testUser.getBalance());
-        assertTrue(testUser.withdraw(100));
-        assertEquals(1212.35, testUser.getBalance());
-
+        try {
+            testUser.deposit(2312.65);
+            testUser.withdraw(1000.30);
+            assertEquals(1312.35, testUser.getBalance());
+            testUser.withdraw(100);
+            assertEquals(1212.35, testUser.getBalance());
+        } catch (Exception e) {
+            fail("Should not have thrown exceptions");
+        }
     }
 
 

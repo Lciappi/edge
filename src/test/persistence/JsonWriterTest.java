@@ -37,7 +37,7 @@ public class JsonWriterTest extends JsonTest{
 
             wlender = reader.read();
             assertEquals("Pat", wlender.getName());
-            assertEquals(11, wlender.getId());
+            assertEquals(13, wlender.getId());
             assertEquals(0, wlender.getPortfolio().size());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
@@ -61,8 +61,8 @@ public class JsonWriterTest extends JsonTest{
 
             LinkedList<Borrower> porta = wlender.getPortfolio();
             assertEquals(2, porta.size());
-            checkBorrower(13,0,"Brown",1,0,0,0,porta.get(0));
-            checkBorrower(16,0,"Baptiste",1,0,0,0,porta.get(1));
+            checkBorrower(15,0,"Brown",1,0,0,0,porta.get(0));
+            checkBorrower(18,0,"Baptiste",1,0,0,0,porta.get(1));
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");

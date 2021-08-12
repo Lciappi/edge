@@ -17,7 +17,7 @@ public class BorrowerTest {
     @Test
     void testConstructor() {
         assertEquals( 0, testUser.getBalance());
-        assertEquals(1, testUser.getId());
+        assertEquals(2, testUser.getId());
         assertEquals("Leonardo", testUser.getName());
 
         assertEquals(0, testUser.getAmountBorrowed());

@@ -68,5 +68,32 @@ class UserTest {
         }
     }
 
+    @Test
+    void depositNegativeNumber(){
+        try {
+            testUser.deposit(-2312.65);
+            fail("Should have caught exception even if its just runtime exception");
+        } catch (RuntimeException e) {
+
+        }
+    }
+
+
+    @Test
+    void withdrawNegativeNumber(){
+        try {
+            testUser.deposit(-2312.65);
+            fail("Should have thrown exception");
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Test
+    void setUsernameTest(){
+        testUser.setUserName("Leo");
+        assertEquals("Leo", testUser.getUserName());
+    }
+
 
 }

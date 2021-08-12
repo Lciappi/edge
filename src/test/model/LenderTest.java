@@ -2,6 +2,7 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import exceptions.FailedToSaveFileException;
 import exceptions.InsufficientFundsException;
 import exceptions.NegativeNumberException;
 import org.junit.jupiter.api.BeforeEach;
@@ -86,6 +87,31 @@ public class LenderTest {
 
         }
     }
+
+    @Test
+    void loanMoneyTestFailNegativeNumber(){
+        testUser.deposit(2000);
+        try {
+            testUser.loanMoney(-500, 5);
+            fail("Should have grabbed a negative number exception and thrown it against this method");
+        }catch (NegativeNumberException exception) {
+
+        } catch (InsufficientFundsException e) {
+            fail("Has enough credits");
+        }
+    }
+
+    @Test
+    void saveFileWorked(){
+        testUser.deposit(100);
+        try {
+            testUser.saveFile();
+        } catch (FailedToSaveFileException failedToSaveFileException) {
+            fail("Should not have thrown failedToSaveFileException");
+        }
+    }
+
+
 
 
 

@@ -26,6 +26,9 @@ public class Lender extends User implements Writable {
     //MODIFIES: this, User
     //EFFECTS: removes amount from balance, adds amount to amountLent, adds interest
     //         returns the user's balance
+    //SIDENOTE: We allow negative interest rates, because they do exist. Countries such as japan, switzerland, and
+    //          denmark have introduced them after miserable attempts to control inflation.
+    //          READ MORE: https://www.bbc.co.uk/news/business-52772950 || All eyes on you mr Powell.
     public double loanMoney(double amount, double interest) throws NegativeNumberException, InsufficientFundsException {
         try {
             super.withdraw(amount);

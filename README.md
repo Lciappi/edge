@@ -1,4 +1,4 @@
-# CPSC 210 Project 
+# Borrowing/Lending money Platform 
 
 ## Edge  -*Small loans for great ideas*
 

@@ -143,10 +143,10 @@ public class LenderGUI extends UserInterface implements ActionListener {
                 fixName(lender.getName());
 
             } catch (Exception e) {
-                System.out.println("File not found");
+                System.out.println("Bank file not found");
             }
         } else {
-            lender = new Lender(availableBorrowers.size() + 1, nameField.getName());
+            lender = new Lender(super.bank.getPortfolio().size() + 1, nameField.getName());
         }
     }
 

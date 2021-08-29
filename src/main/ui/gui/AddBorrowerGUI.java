@@ -1,5 +1,6 @@
 package ui.gui;
 
+import com.sun.codemodel.internal.JOp;
 import exceptions.FailedToSaveFileException;
 import exceptions.InsufficientFundsException;
 import model.Borrower;
@@ -19,6 +20,7 @@ public class AddBorrowerGUI extends UserInterface implements ActionListener {
     private JLabel instructions;
     private JButton submitLoan;
     private JButton exit;
+    private final String[] columnNames = {"Name", "Amount Requested", "Potential Interest", "Risk Score"};
 
     //EFFECTS: constructor class
     //MODIFIES: this, UserInterface
@@ -37,21 +39,36 @@ public class AddBorrowerGUI extends UserInterface implements ActionListener {
     //MODIFIES: UserInterface
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("submitLoan")) {
-            Borrower candidate = availableBorrowers.get(table.getSelectedRow());
+            Borrower candidate = bank.getPortfolio().get(table.getSelectedRow());
             try {
                 lender.processLoan(candidate);
                 playSound("data/depositName.wav");
                 JOptionPane.showMessageDialog(this, "Success!" + candidate.getAmountBorrowed()
                         + " were lent to " + candidate.getAmountBorrowed());
                 balance.setText(Double.toString(lender.getBalance()));
+                super.bank.removeBorrower(candidate);
+
+                for(Borrower i : bank.getPortfolio()) {
+                    System.out.println(i.getName());
+                }
+
+                bank.saveCurrent("./data/bank.json");
+                lender.saveFile();
+
+                new LenderGUI(true);
+                dispose();
+
             } catch (InsufficientFundsException exc) {
                 playSound("data/withdraw.wav");
                 JOptionPane.showMessageDialog(this,"Error! Insufficient Funds");
+            } catch (FailedToSaveFileException exception) {
+                JOptionPane.showMessageDialog(this, exception.getMessage());
             }
         }
         if (e.getActionCommand().equals("exit")) {
             try {
                 lender.saveFile();
+                bank.saveCurrent("./data/bank.json");
             } catch (FailedToSaveFileException exception) {
                 JOptionPane.showMessageDialog(this,"Error! Could not save file");
             }
@@ -79,13 +96,13 @@ public class AddBorrowerGUI extends UserInterface implements ActionListener {
         exit = new JButton("Go back");
         exit.setActionCommand("exit");
         exit.addActionListener(this);
-        String[] columnNames = {"Name", "Amount Requested", "Potential Interest", "Risk Score"};
 
+        displayTable(columnNames, bank.getPortfolio());
         add(tittleLabel, TOP_ALIGNMENT);
         displayUserInfo();
-        displayTable(columnNames, availableBorrowers);
         add(submitLoan, BOTTOM_ALIGNMENT);
         add(exit, BOTTOM_ALIGNMENT);
         add(instructions);
     }
+
 }

@@ -1,0 +1,54 @@
+{
+    "balance": 1554,
+    "portfolio": [
+        {
+            "interestRate": 10,
+            "balance": 5150,
+            "name": "Dave Matthews",
+            "amountBorrowed": 5000,
+            "interestOwed": 500,
+            "id": 18,
+            "riskScore": 600
+        },
+        {
+            "interestRate": 1,
+            "balance": 1400,
+            "name": "John Clayton Mayer",
+            "amountBorrowed": 20,
+            "interestOwed": 0.2,
+            "id": 8,
+            "riskScore": 0
+        },
+        {
+            "interestRate": 10,
+            "balance": 5200,
+            "name": "Walt Grace",
+            "amountBorrowed": 10000,
+            "interestOwed": 1000,
+            "id": 72,
+            "riskScore": 960
+        },
+        {
+            "interestRate": 2,
+            "balance": 69,
+            "name": "David Ryan Harris",
+            "amountBorrowed": 6520,
+            "interestOwed": 130,
+            "id": 13,
+            "riskScore": 100
+        },
+        {
+            "interestRate": 2,
+            "balance": 456,
+            "name": "Pino Paladino",
+            "amountBorrowed": 852,
+            "interestOwed": 12,
+            "id": 322,
+            "riskScore": 300
+        }
+    ],
+    "name": "Bank",
+    "amountLent": 0,
+    "potentialInterest": 0,
+    "id": 6
+}

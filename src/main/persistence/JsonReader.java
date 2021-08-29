@@ -67,13 +67,14 @@ public class JsonReader {
 
         for (Object json : jsonArray) {
             JSONObject nextBorrower = (JSONObject) json;
-            addBorrower(rlender, nextBorrower);
+            parseBorrower(rlender, nextBorrower);
         }
+
     }
 
     // MODIFIES: rlender
     // EFFECTS: parses Borrower from JSON object and adds it to portfolio
-    private void addBorrower(Lender rlender, JSONObject jsonObject) {
+    private void parseBorrower(Lender rlender, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         int id = jsonObject.getInt("id");
         double balance = jsonObject.getDouble("balance");

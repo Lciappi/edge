@@ -17,6 +17,8 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.LinkedList;
+
+import persistence.JsonReader;
 import  sun.audio.*;    //import the sun.audio package
 import ui.Main;
 
@@ -24,7 +26,8 @@ import  java.io.*;
 
 //common functionality among users ui
 public class UserInterface extends JFrame {
-    protected LinkedList<Borrower> availableBorrowers;
+//    protected LinkedList<Borrower> availableBorrowers;
+    protected Lender bank;
     protected Lender lender;
     protected JTable table;
     protected Boolean loadData;
@@ -34,27 +37,11 @@ public class UserInterface extends JFrame {
     protected JLabel balance = new JLabel("Balance: ");
 
 
-    //MOFIFIES: this, super
+    //MODIFIES: this, super
     //EFFECTS: constructor class that initializes variables
     public UserInterface(String st) {
         super(st);
-        availableBorrowers = new LinkedList<>();
-        Borrower john = new Borrower(1, "John");
-        Borrower matthew = new Borrower(1, "Matthew");
-        Borrower igor = new Borrower(1, "Igor");
-        availableBorrowers.add(john);
-        availableBorrowers.add(matthew);
-        availableBorrowers.add(igor);
-        john.loan(100);
-        john.loan(1505);
-        john.loan(20);
-
-        matthew.loan(5000);
-        matthew.loan(200);
-        matthew.payInterest(10);
-        matthew.payLoan(200);
-        igor.loan(1400);
-
+        refreshBank();
     }
 
     //CODE COPIED FROM: https://stackoverflow.com/questions/15449022/show-prompt-before-closing-jframe
@@ -72,6 +59,7 @@ public class UserInterface extends JFrame {
                 if (promptResult == JOptionPane.YES_OPTION) {
                     try {
                         lender.saveFile();
+                        bank.saveFile();
                     } catch (FailedToSaveFileException e) {
                         JOptionPane.showMessageDialog(that,"Error! Could not save file");
                     }
@@ -172,5 +160,14 @@ public class UserInterface extends JFrame {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
+    }
+
+    protected  void refreshBank() {
+        try {
+            JsonReader reader = new JsonReader("./data/bank.json");
+            bank = reader.read();
+        } catch (Exception e) {
+            System.out.println("File not found");
+        }
     }
 }

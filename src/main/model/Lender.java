@@ -48,8 +48,8 @@ public class Lender extends User implements Writable {
     public void processLoan(Borrower finalist) throws InsufficientFundsException {
 
         try {
-            this.addBorrower(finalist);
             this.loanMoney(finalist.getAmountBorrowed(), finalist.getInterestOwed());
+            this.addBorrower(finalist);
             System.out.println(finalist.getName() + " has been added to your portfolio");
         } catch (InsufficientFundsException exception) {
             throw exception;
@@ -60,7 +60,7 @@ public class Lender extends User implements Writable {
 
     //MODIFIES: this
     //EFFECTS: adds borrower to linkedlist
-    public void addBorrower(Borrower client) {
+    public void addBorrower(Borrower client)  {
         this.portfolio.add(client);
     }
 
@@ -97,7 +97,13 @@ public class Lender extends User implements Writable {
     //MODIFIES: lender.json
     //EFFECTS: saves this object to json file
     public void saveFile() throws FailedToSaveFileException {
-        JsonWriter edgarAllenPoe = new JsonWriter("./data/lender.json");
+        saveCurrent("./data/lender.json");
+    }
+
+    //MODIFIES: specified file
+    //EFFECTS: converts items to json objects
+    public void saveCurrent(String destination) throws FailedToSaveFileException {
+        JsonWriter edgarAllenPoe = new JsonWriter(destination);
         try {
             edgarAllenPoe.open();
             edgarAllenPoe.write(this);
@@ -106,6 +112,10 @@ public class Lender extends User implements Writable {
         } catch (Exception e) {
             throw new FailedToSaveFileException("Failed ot save File");
         }
+    }
+
+    public void removeBorrower(Borrower i) {
+        this.portfolio.remove(i);
     }
 
     public double getAmountLent() {

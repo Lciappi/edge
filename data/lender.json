@@ -1,63 +1,27 @@
 {
-    "balance": 5929,
+    "balance": 83960,
     "portfolio": [
         {
-            "interestRate": 6,
-            "balance": 154,
-            "name": "Pat Bustamante",
-            "amountBorrowed": 4354,
-            "interestOwed": 1000,
-            "id": 234,
-            "riskScore": 45
-        },
-        {
-            "interestRate": 7,
-            "balance": 7894,
-            "name": "Santiago Topelberg",
-            "amountBorrowed": 2123,
-            "interestOwed": 12,
-            "id": 235,
-            "riskScore": 5
+            "interestRate": 10,
+            "balance": 5150,
+            "name": "Michael Easter",
+            "amountBorrowed": 5000,
+            "interestOwed": 300,
+            "id": 19,
+            "riskScore": 600
         },
         {
             "interestRate": 2,
-            "balance": 12,
-            "name": "Elisa Gaia",
+            "balance": 69,
+            "name": "David Ryan Harris",
             "amountBorrowed": 6520,
             "interestOwed": 130,
-            "id": 236,
+            "id": 14,
             "riskScore": 100
-        },
-        {
-            "interestRate": 16,
-            "balance": 10,
-            "name": "Ashe Stockholm",
-            "amountBorrowed": 8021,
-            "interestOwed": 130,
-            "id": 238,
-            "riskScore": 550
-        },
-        {
-            "interestRate": 3,
-            "balance": 1400,
-            "name": "Mary Mac",
-            "amountBorrowed": 453,
-            "interestOwed": 0.2,
-            "id": 239,
-            "riskScore": 2
-        },
-        {
-            "interestRate": 8,
-            "balance": 7894,
-            "name": "Chris Martin",
-            "amountBorrowed": 1625,
-            "interestOwed": 31,
-            "id": 18,
-            "riskScore": 300
         }
     ],
-    "name": "Leonardo Ciappi",
-    "amountLent": 15000,
-    "potentialInterest": 31,
-    "id": 7
+    "name": "Igor",
+    "amountLent": 11520,
+    "potentialInterest": 430,
+    "id": 10
 }

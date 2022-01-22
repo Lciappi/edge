@@ -4,14 +4,10 @@ import exceptions.FailedToSaveFileException;
 import exceptions.InsufficientFundsException;
 import exceptions.NegativeNumberException;
 import exceptions.RuntimeNegativeNumberException;
-import jdk.nashorn.internal.scripts.JO;
+
 import model.Borrower;
 import model.Lender;
 import model.User;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -19,10 +15,6 @@ import java.awt.event.WindowEvent;
 import java.util.LinkedList;
 
 import persistence.JsonReader;
-import  sun.audio.*;    //import the sun.audio package
-import ui.Main;
-
-import  java.io.*;
 
 //common functionality among users ui
 public class UserInterface extends JFrame {
@@ -117,7 +109,6 @@ public class UserInterface extends JFrame {
         try {
             u.deposit(Double.parseDouble(input));
             balance.setText("Balance: " + u.getBalance());
-            playSound("data/depositName.wav");
 
         } catch (RuntimeNegativeNumberException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -128,18 +119,7 @@ public class UserInterface extends JFrame {
 
     }
 
-    //EFFECTS: this
-    public void playSound(final String url) {
-        InputStream sound;
-        try {
-            sound = new FileInputStream(new File(url));
-            AudioStream stream = new AudioStream(sound);
-            AudioPlayer.player.start(stream);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     //EFFECTS: manages withdraws, updates balance in gui
     //MODIFIES: this, User
@@ -149,7 +129,6 @@ public class UserInterface extends JFrame {
 
         try {
             u.withdraw(Double.parseDouble(input));
-            playSound("data/withdraw.wav");
             JOptionPane.showMessageDialog(this, "Success!");
             balance.setText("Balance: " + u.getBalance());
         } catch (InsufficientFundsException e) {

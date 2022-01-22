@@ -1,6 +1,5 @@
 package ui.gui;
 
-import com.sun.codemodel.internal.JOp;
 import exceptions.FailedToSaveFileException;
 import exceptions.InsufficientFundsException;
 import model.Borrower;
@@ -42,9 +41,8 @@ public class AddBorrowerGUI extends UserInterface implements ActionListener {
             Borrower candidate = bank.getPortfolio().get(table.getSelectedRow());
             try {
                 lender.processLoan(candidate);
-                playSound("data/depositName.wav");
-                JOptionPane.showMessageDialog(this, "Success!" + candidate.getAmountBorrowed()
-                        + " were lent to " + candidate.getAmountBorrowed());
+                JOptionPane.showMessageDialog(this, "Success! " + candidate.getAmountBorrowed()
+                        + " were lent to " + candidate.getName());
                 balance.setText(Double.toString(lender.getBalance()));
                 super.bank.removeBorrower(candidate);
 
@@ -59,7 +57,6 @@ public class AddBorrowerGUI extends UserInterface implements ActionListener {
                 dispose();
 
             } catch (InsufficientFundsException exc) {
-                playSound("data/withdraw.wav");
                 JOptionPane.showMessageDialog(this,"Error! Insufficient Funds");
             } catch (FailedToSaveFileException exception) {
                 JOptionPane.showMessageDialog(this, exception.getMessage());
@@ -80,11 +77,12 @@ public class AddBorrowerGUI extends UserInterface implements ActionListener {
     //EFFECTS: initializes and adds gui elements to panel
     //MODIFIES: this
     public void guiElements() {
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(1000, 600));
         ((JPanel) getContentPane()).setBorder(new EmptyBorder(50, 50, 50, 50));
         setLayout(new FlowLayout());
-        this.setLocationRelativeTo(null);
+
 
         instructions = new JLabel("Please select a borrower to add to your portfolio");
         tittleLabel = new JLabel("Add Borrowers to Portfolio");

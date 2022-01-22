@@ -1,5 +1,6 @@
 package ui.gui;
 
+
 import exceptions.NoNameException;
 import model.Lender;
 import persistence.JsonReader;
@@ -27,7 +28,7 @@ public class LenderGUI extends UserInterface implements ActionListener {
         this.loadData = loadData;
 
         init();
-        columnNames = new String[]{"Name", "Amount Borrowed", "Interest Owed"};
+        columnNames = new String[]{"Name", "Amount Loaned", "Interest Earned"};
         guiElements();
 
         checkNLoadData();

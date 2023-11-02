@@ -2,6 +2,10 @@
 
 ## Edge  -*Small loans for great ideas*
 
+- Created a peer-to-peer lending application that allows users to lend money through a Swing graphical interface.
+- Followed strict object-orientation, low coupling, exception handling and unit testing (JUnit Tests).
+- Implemented a session management system by reading and writing to JSON files.
+
 Description of Edge:
 
 Peer to peer loans are revolutionising the financial industry. The idea is to create a 
